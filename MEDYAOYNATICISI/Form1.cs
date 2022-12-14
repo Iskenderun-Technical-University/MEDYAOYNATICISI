@@ -1,4 +1,6 @@
 using System.Runtime.InteropServices;
+using Microsoft.DirectX.AudioVideoPlayback;
+
 
 namespace MEDYAOYNATICISI
 {

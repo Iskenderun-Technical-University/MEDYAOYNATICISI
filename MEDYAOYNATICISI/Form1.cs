@@ -132,12 +132,18 @@ namespace MEDYAOYNATICISI
             btnmax.Visible = false;
             btnekrankucult.Visible = true;
 
+
+            btnkpt.Location = new Point(1885, -2);
+            btnekrankucult.Location = new Point(1840, -2);
+            btnmax.Location = new Point(1840, -2);
+            btnmin.Location = new Point(1795, -2);
+
             buttonsonraki.Location = new Point(590,10);
             buttononceki.Location = new Point(490,10);
             buttonoynat.Location = new Point(540,10);
 
-            panelsag.Width = 249;  ;
-          //  panelliste.Enabled = false;
+            panelsag.Width = 249;  
+          
         }
 
         private void MF()
@@ -162,6 +168,14 @@ namespace MEDYAOYNATICISI
 
         private void btnekrankucult_Click(object sender, EventArgs e)
         {
+
+
+            btnkpt.Location = new Point(1237,- 2);
+            btnekrankucult.Location = new Point(1194, -2);
+            btnmax.Location = new Point(1194, -2);
+            btnmin.Location = new Point(1148, -2);
+
+
             this.WindowState = FormWindowState.Normal;
             this.btnmax.Visible = true;
             this.btnekrankucult.Visible = false;

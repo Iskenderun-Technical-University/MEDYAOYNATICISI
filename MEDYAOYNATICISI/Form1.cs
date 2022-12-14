@@ -23,15 +23,22 @@ namespace MEDYAOYNATICISI
         private int selectindex=0;
         private Size FormSize;
         private Size PanelSize;
-        private string folderpath= "C:\\Users\\cmahm\\Source\\Repos\\Iskenderun-Technical-University\\MEDYAOYNATICISI\\MEDYAOYNATICISI\\iconlar";
+        private string folderpath=@"";
 
             
         private void Form1_Load(object sender, EventArgs e)
         {
-            FormSize = new Size(this.Width,this.Height);
-            PanelSize = new Size(panelvideo.Width, panelvideo.Height);
 
-            videoPath = Directory.GetFiles(folderpath,"* .mp4");
+            FormSize = new Size(this.Width, this.Height);
+            PanelSize = new Size(panelvideo.Width, panelvideo.Height);
+            FolderBrowserDialog fd = new FolderBrowserDialog();
+            fd.ShowDialog();
+
+            folderpath = fd.SelectedPath;
+            
+            
+           
+            videoPath = Directory.GetFiles(folderpath, "* .mp4");
             if (videoPath != null)
             {
                 foreach(string path in videoPath)
@@ -46,7 +53,7 @@ namespace MEDYAOYNATICISI
             }
             else
             {
-                listBox1.Selectedindex = selectindex;
+                listBox1.SelectedIndex = selectindex;
 
             }
         }

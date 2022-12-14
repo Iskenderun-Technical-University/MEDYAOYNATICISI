@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Microsoft.DirectX.AudioVideoPlayback;
 
 
@@ -16,10 +17,38 @@ namespace MEDYAOYNATICISI
 
             [DllImport("user32.dll", EntryPoint = "SendMessage")]
             private extern static void SendMessage(System.IntPtr hwnd, int wmsg, int wparam, int ýparam);
-       
+
+        private Video video;
+        private string[] videoPath;
+        private int selectindex=0;
+        private Size FormSize;
+        private Size PanelSize;
+        private string folderpath= "C:\\Users\\cmahm\\Source\\Repos\\Iskenderun-Technical-University\\MEDYAOYNATICISI\\MEDYAOYNATICISI\\iconlar";
+
+            
         private void Form1_Load(object sender, EventArgs e)
         {
+            FormSize = new Size(this.Width,this.Height);
+            PanelSize = new Size(panelvideo.Width, panelvideo.Height);
 
+            videoPath = Directory.GetFiles(folderpath,"* .mp4");
+            if (videoPath != null)
+            {
+                foreach(string path in videoPath)
+                {
+                    string vid = path.Replace(folderpath, string.Empty);
+                    vid = vid.Replace("* .mp4", string.Empty);
+                    listBox1.Items.Add(vid);
+                }
+            }
+            if(listBox1.SelectedItems.Count>0)
+            { 
+            }
+            else
+            {
+                listBox1.Selectedindex = selectindex;
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -74,7 +103,50 @@ namespace MEDYAOYNATICISI
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                video.Stop();
+                video.Dispose();
+            }
+            catch
+            {
 
+            }
+            int index = listBox1.SelectedIndex;
+            selectindex = index;
+            video = new Video(videoPath[index], false);
+            video.Owner = panelvideo;
+            panelvideo.Size = PanelSize;
+            video.Play();
+            tmrvideo.Enabled = true;
+            video.Ending += Video_Ending;
+            label1.Text = listBox1.Text;
+        }
+
+        private void Video_Ending(object sender,EventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                System.Threading.Thread.Sleep(2000);
+                if (InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        NextVideo();
+                    }));
+                }
+            });
+        }
+        private void NextVideo()
+        {
+            int index = listBox1.SelectedIndex;
+            index++;
+            if(index>videoPath.Length)
+            {
+                index = 0;
+                selectindex = index;
+                listBox1.SelectedIndex = index;
+            }
         }
 
         private void panel6_Paint(object sender, PaintEventArgs e)
@@ -210,6 +282,46 @@ namespace MEDYAOYNATICISI
         private void button1_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void panelvideo_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void buttononceki_Click(object sender, EventArgs e)
+        {
+            int index = listBox1.SelectedIndex;
+            index--;
+            if (index == -1)
+                index = videoPath.Length - 1;
+            selectindex = index;
+            listBox1.SelectedIndex = index;
+        }
+
+        private void buttonsonraki_Click(object sender, EventArgs e)
+        {
+            NextVideo();
+        }
+
+        private void buttonoynat_Click(object sender, EventArgs e)
+        {
+            if (!video.Playing)
+            {
+                video.Play();
+                tmrvideo.Enabled = true;
+                buttonoynat.Text = "Durdur";
+            }
+            else if (video.Playing)
+            {
+                video.Pause();
+                tmrvideo.Enabled = false;
+            }
+        }
+
+        private void trackvolume_Scroll(object sender, EventArgs e)
+        {
+            video.Audio.Volume = trackvolume.Value;
         }
     }
     }

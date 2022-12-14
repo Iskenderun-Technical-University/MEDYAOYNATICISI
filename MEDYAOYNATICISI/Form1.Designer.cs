@@ -48,16 +48,17 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
             this.ımageList2 = new System.Windows.Forms.ImageList(this.components);
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.trackvolume = new System.Windows.Forms.TrackBar();
             this.buttononceki = new System.Windows.Forms.Button();
             this.buttonsonraki = new System.Windows.Forms.Button();
             this.buttonoynat = new System.Windows.Forms.Button();
+            this.tmrvideo = new System.Windows.Forms.Timer(this.components);
             this.panelbas.SuspendLayout();
             this.panelsag.SuspendLayout();
             this.panel.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackvolume)).BeginInit();
             this.SuspendLayout();
             // 
             // panelbas
@@ -257,12 +258,13 @@
             this.panelvideo.Name = "panelvideo";
             this.panelvideo.Size = new System.Drawing.Size(980, 601);
             this.panelvideo.TabIndex = 0;
+            this.panelvideo.Paint += new System.Windows.Forms.PaintEventHandler(this.panelvideo_Paint);
             // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel7.Controls.Add(this.button7);
-            this.panel7.Controls.Add(this.trackBar1);
+            this.panel7.Controls.Add(this.trackvolume);
             this.panel7.Controls.Add(this.buttononceki);
             this.panel7.Controls.Add(this.buttonsonraki);
             this.panel7.Controls.Add(this.buttonoynat);
@@ -310,12 +312,13 @@
             this.ımageList2.Images.SetKeyName(14, "ters.png");
             this.ımageList2.Images.SetKeyName(15, "ters.png");
             // 
-            // trackBar1
+            // trackvolume
             // 
-            this.trackBar1.Location = new System.Drawing.Point(876, 9);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(130, 56);
-            this.trackBar1.TabIndex = 10;
+            this.trackvolume.Location = new System.Drawing.Point(876, 9);
+            this.trackvolume.Name = "trackvolume";
+            this.trackvolume.Size = new System.Drawing.Size(130, 56);
+            this.trackvolume.TabIndex = 10;
+            this.trackvolume.Scroll += new System.EventHandler(this.trackvolume_Scroll);
             // 
             // buttononceki
             // 
@@ -330,7 +333,7 @@
             this.buttononceki.Size = new System.Drawing.Size(49, 47);
             this.buttononceki.TabIndex = 9;
             this.buttononceki.UseVisualStyleBackColor = false;
-            this.buttononceki.Click += new System.EventHandler(this.button6_Click);
+            this.buttononceki.Click += new System.EventHandler(this.buttononceki_Click);
             // 
             // buttonsonraki
             // 
@@ -345,7 +348,7 @@
             this.buttonsonraki.Size = new System.Drawing.Size(50, 47);
             this.buttonsonraki.TabIndex = 8;
             this.buttonsonraki.UseVisualStyleBackColor = false;
-            this.buttonsonraki.Click += new System.EventHandler(this.button5_Click);
+            this.buttonsonraki.Click += new System.EventHandler(this.buttonsonraki_Click);
             // 
             // buttonoynat
             // 
@@ -360,7 +363,7 @@
             this.buttonoynat.Size = new System.Drawing.Size(50, 45);
             this.buttonoynat.TabIndex = 7;
             this.buttonoynat.UseVisualStyleBackColor = false;
-            this.buttonoynat.Click += new System.EventHandler(this.button4_Click_1);
+            this.buttonoynat.Click += new System.EventHandler(this.buttonoynat_Click);
             // 
             // Form1
             // 
@@ -386,7 +389,7 @@
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackvolume)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -408,11 +411,19 @@
         private ImageList ımageList2;
         private Button buttonoynat;
         private Button buttononceki;
+
+        public Form1(Button buttononceki)
+        {
+            this.buttononceki = buttononceki;
+        }
+
         private Button buttonsonraki;
         private Button button7;
         private TrackBar trackBar1;
         private Button panelliste;
         private ListBox listBox1;
         private Button btnekrankucult;
+        private System.Windows.Forms.Timer tmrvideo;
+        private TrackBar trackvolume;
     }
 }

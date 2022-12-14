@@ -314,7 +314,7 @@ namespace MEDYAOYNATICISI
             {
                 video.Play();
                 tmrvideo.Enabled = true;
-                buttonoynat.Text = "Durdur...";
+                buttonoynat.Text = "Durdur....";
             }
             else if (video.Playing)
             {

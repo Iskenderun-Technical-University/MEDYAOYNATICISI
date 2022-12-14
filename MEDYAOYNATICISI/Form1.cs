@@ -22,7 +22,7 @@ namespace MEDYAOYNATICISI
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -91,5 +91,109 @@ namespace MEDYAOYNATICISI
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panellist_Click(object sender, EventArgs e)
+        {
+
+                if(panelsag.Width==249)
+            {
+                panelsag.Width = 35;
+            }
+            else 
+            {
+                panelsag.Width = 249;
+            }
+        }
+
+        private void panelbas_DoubleClick(object sender, EventArgs e)
+        {
+            Form1 frm = new Form1();
+            if (FormWindowState.Normal==frm.WindowState)
+            {
+                WindowState = WindowState == FormWindowState.Maximized
+                    ? FormWindowState.Normal : FormWindowState.Maximized;
+            }
+            if(FormWindowState.Maximized==frm.WindowState)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void btnmax_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            btnmax.Visible = false;
+            btnekrankucult.Visible = true;
+
+            buttonsonraki.Location = new Point(590,10);
+            buttononceki.Location = new Point(490,10);
+            buttonoynat.Location = new Point(540,10);
+
+            panelsag.Width = 249;  ;
+          //  panelliste.Enabled = false;
+        }
+
+        private void MF()
+        {
+            //Form1 frm = new Form1();
+            if(this.WindowState==FormWindowState.Maximized)
+
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.btnmax.Visible = false;
+                this.btnekrankucult.Visible = true;
+            }
+            else if(this.WindowState == FormWindowState.Minimized)
+            {
+
+                this.WindowState = FormWindowState.Normal;
+                this.btnmax.Visible = false;
+                this.btnekrankucult.Visible = true;
+            }
+           
+        }
+
+        private void btnekrankucult_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.btnmax.Visible = true;
+            this.btnekrankucult.Visible = false;
+
+        }
+
+        private void panelliste_Click(object sender, EventArgs e)
+        {
+            if (panelsag.Width ==249)
+            {
+                panelsag.Width = 35;
+
+                panel6.Location = new Point(0,36);
+                panel7.Location = new Point(0,651);
+                panelvideo.Location = new Point(26,8);
+
+            }
+        else
+            {
+                panelsag.Width = 249;   ;
+            }
+        
+        }
+
+        private void btnmin_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
-}
+    }

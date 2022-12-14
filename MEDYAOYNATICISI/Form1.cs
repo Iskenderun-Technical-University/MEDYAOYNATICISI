@@ -23,7 +23,7 @@ namespace MEDYAOYNATICISI
         private int selectindex=0;
         private Size FormSize;
         private Size PanelSize;
-        private string folderpath=@"";
+        private string folderpath= @"";
 
             
         private void Form1_Load(object sender, EventArgs e)
@@ -34,17 +34,17 @@ namespace MEDYAOYNATICISI
             FolderBrowserDialog fd = new FolderBrowserDialog();
             fd.ShowDialog();
 
+            
             folderpath = fd.SelectedPath;
             
-            
            
-            videoPath = Directory.GetFiles(folderpath, "* .mp4");
+            videoPath = Directory.GetFiles(folderpath, ".mp4");
             if (videoPath != null)
             {
                 foreach(string path in videoPath)
                 {
                     string vid = path.Replace(folderpath, string.Empty);
-                    vid = vid.Replace("* .mp4", string.Empty);
+                    vid = vid.Replace(".mp4", string.Empty);
                     listBox1.Items.Add(vid);
                 }
             }
@@ -314,7 +314,7 @@ namespace MEDYAOYNATICISI
             {
                 video.Play();
                 tmrvideo.Enabled = true;
-                buttonoynat.Text = "Durdur";
+                buttonoynat.Text = "Durdur...";
             }
             else if (video.Playing)
             {
